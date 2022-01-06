@@ -14,8 +14,6 @@ class TrainOrTest(Enum):
     TEST = "test"
 
 
-REDUCTION_FACTOR = 4
-
 DATA_COMPRESSED_DIR = "data_compressed"
 DATA_ORIGINAL_DIR = "data_original"
 DATA_PROCESSED_DIR = "data_processed"

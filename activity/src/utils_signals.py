@@ -45,11 +45,21 @@ def read_signals(train_or_test: TrainOrTest,
             lines = f.readlines()
         for line in lines:  # number of samples, 2947 or 7352
             row = [float(reading) for reading in line.split()]  # 128
+            row = _standardize(row)
             rows.append(row)
         signals_list.append(rows)
     signals = np.array(signals_list)  # shape (9, 7352 or 2947, 128)
     signals = np.transpose(signals, (1, 0, 2))  # shape (7352 or 2947, 9, 128)
     return signals
+
+
+def _standardize(my_array: np.ndarray) -> np.ndarray:
+    """Standardizes an ndarray by subtracting its average and dividing by its
+    standard deviation.
+    """
+    my_array -= np.average(my_array)
+    my_array /= np.std(my_array)
+    return my_array
 
 
 def read_labels(train_or_test: TrainOrTest,
