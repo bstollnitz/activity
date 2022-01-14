@@ -53,7 +53,15 @@ def _display_fft_graphs() -> None:
     fft = np.abs(np.fft.fftshift(np.fft.fft(y3)))
     fft = fft[len(fft) // 2:]
     frequencies = np.arange(len(fft))
-    graph_fft_signals(x, y1, y2, y3, frequencies, fft)
+    graph_fft_signals(x / n, y1, y2, y3, frequencies, fft)
+
+    all_signals = read_signals(TrainOrTest.TRAIN,
+                               get_absolute_dir(DATA_ORIGINAL_DIR, False))
+    signal = all_signals[0, 0, :]
+    graph_signal(signal, "Signal", "Time", "Amplitude")
+    fft = np.abs(np.fft.fftshift(np.fft.fft(signal)))
+    fft = fft[fft.shape[0] // 2:]
+    graph_signal(fft, "FFT of Signal", "Frequency", "Amplitude")
 
 
 ## Spectrogram graphs
@@ -65,10 +73,6 @@ def _display_spectrogram_graphs() -> None:
     all_signals = read_signals(TrainOrTest.TRAIN,
                                get_absolute_dir(DATA_ORIGINAL_DIR, False))
     signal = all_signals[0, 0, :]
-    graph_signal(signal, "Signal", "Time", "Amplitude")
-    fft = np.abs(np.fft.fftshift(np.fft.fft(signal)))
-    fft = fft[fft.shape[0] // 2:]
-    graph_signal(fft, "FFT of Signal", "Frequency", "Amplitude")
 
     spectrogram = _create_spectrogram(signal, True)
     graph_gram(spectrogram, GramType.SPECTROGRAMS)
