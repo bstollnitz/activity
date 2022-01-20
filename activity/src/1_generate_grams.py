@@ -3,7 +3,6 @@ corresponding labels."""
 
 import argparse
 import logging
-import math
 import zipfile
 from pathlib import Path
 
