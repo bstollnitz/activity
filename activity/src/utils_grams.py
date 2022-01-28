@@ -98,8 +98,9 @@ def _get_gram_file_path(
 ) -> Path:
     """Returns path to a gram signal file.
     """
-    return Path(data_processed_dir,
-                f"{train_or_test.value}_{gram_type.value}.hdf5")
+    folder = Path(data_processed_dir)
+    folder.mkdir(exist_ok=True)
+    return Path(folder, f"{train_or_test.value}_{gram_type.value}.hdf5")
 
 
 def _get_label_file_path(train_or_test: TrainOrTest,

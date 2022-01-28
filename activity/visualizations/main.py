@@ -5,7 +5,7 @@ import logging
 import numpy as np
 import pywt
 
-from common import DATA_ORIGINAL_DIR, GramType, TrainOrTest, get_absolute_dir
+from common import DATA_ORIGINAL_DIR, GramType, TrainOrTest
 from utils_graph import (graph_fft_signals, graph_gaussian_signals, graph_gram,
                          graph_grams, graph_signal, graph_signals,
                          graph_wavelet_signals)
@@ -23,8 +23,7 @@ def _display_signal_graphs() -> None:
     * (x, y, z) representing the angular velocity vector measured by the
     gyroscope.
     """
-    signals = read_signals(TrainOrTest.TRAIN,
-                           get_absolute_dir(DATA_ORIGINAL_DIR, False))
+    signals = read_signals(TrainOrTest.TRAIN, DATA_ORIGINAL_DIR)
     components = signals[0, :, :]
     label = _get_first_label()
     logging.info("Label: %s", label)
@@ -32,9 +31,8 @@ def _display_signal_graphs() -> None:
 
 
 def _get_first_label() -> str:
-    data_original_dir = get_absolute_dir(DATA_ORIGINAL_DIR, False)
-    labels = read_labels(TrainOrTest.TRAIN, data_original_dir)
-    activity_names = read_activity_names(data_original_dir)
+    labels = read_labels(TrainOrTest.TRAIN, DATA_ORIGINAL_DIR)
+    activity_names = read_activity_names(DATA_ORIGINAL_DIR)
     label = activity_names[labels[0]]
     return label
 
@@ -55,8 +53,7 @@ def _display_fft_graphs() -> None:
     frequencies = np.arange(len(fft))
     graph_fft_signals(x / n, y1, y2, y3, frequencies, fft)
 
-    all_signals = read_signals(TrainOrTest.TRAIN,
-                               get_absolute_dir(DATA_ORIGINAL_DIR, False))
+    all_signals = read_signals(TrainOrTest.TRAIN, DATA_ORIGINAL_DIR)
     signal = all_signals[0, 0, :]
     graph_signal(signal, "Signal", "Time", "Amplitude")
     fft = np.abs(np.fft.fftshift(np.fft.fft(signal)))
@@ -70,8 +67,7 @@ def _display_fft_graphs() -> None:
 def _display_spectrogram_graphs() -> None:
     """Displays graphs that demonstrate how spectrograms work.
     """
-    all_signals = read_signals(TrainOrTest.TRAIN,
-                               get_absolute_dir(DATA_ORIGINAL_DIR, False))
+    all_signals = read_signals(TrainOrTest.TRAIN, DATA_ORIGINAL_DIR)
     signal = all_signals[0, 0, :]
 
     spectrogram = _create_spectrogram(signal, True)
@@ -122,8 +118,7 @@ def _get_gaussian_filter(b: float, b_list: np.ndarray,
 def _display_scaleogram_graphs() -> None:
     """Displays graphs that demonstrate how scaleograms work.
     """
-    all_signals = read_signals(TrainOrTest.TRAIN,
-                               get_absolute_dir(DATA_ORIGINAL_DIR, False))
+    all_signals = read_signals(TrainOrTest.TRAIN, DATA_ORIGINAL_DIR)
     signal = all_signals[0, 0, :]
 
     graph_wavelet_signals(signal, times=[20, 100], scales=[2, 8])

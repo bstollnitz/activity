@@ -12,7 +12,7 @@ import pywt
 import utils_grams
 import utils_signals
 from common import (DATA_COMPRESSED_DIR, DATA_ORIGINAL_DIR, DATA_PROCESSED_DIR,
-                    GramType, TrainOrTest, get_absolute_dir)
+                    GramType, TrainOrTest)
 
 
 def generate_all(data_compressed_dir: str, data_original_dir: str,
@@ -163,13 +163,13 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_compressed_dir",
                         dest="data_compressed_dir",
-                        default=get_absolute_dir(DATA_COMPRESSED_DIR))
+                        default=DATA_COMPRESSED_DIR)
     parser.add_argument("--data_original_dir",
                         dest="data_original_dir",
-                        default=get_absolute_dir(DATA_ORIGINAL_DIR))
+                        default=DATA_ORIGINAL_DIR)
     parser.add_argument("--data_processed_dir",
                         dest="data_processed_dir",
-                        default=get_absolute_dir(DATA_PROCESSED_DIR))
+                        default=DATA_PROCESSED_DIR)
     args = parser.parse_args()
 
     generate_all(args.data_compressed_dir, args.data_original_dir,
