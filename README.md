@@ -2,7 +2,14 @@
 
 This project uses spectrograms and scaleograms to predict human activity (e.g. walking, standing) from sensor information (accelerometer, gyroscope) captured by a smartphone.
 
-## Run on your local machine
+The code in this repro relates to the following blog posts:
+
+* [Creating spectrograms and scaleograms for signal classification](https://bea.stollnitz.com/blog/spectrograms-scaleograms/)
+(more to come)
+
+## Setup
+
+If you have access to GitHub Codespaces, click on the "Code" button in this GitHub repo, select the "Codespaces" tab, and then click on "New codespace". Alternatively, you can set up your local machine using the following steps.
 
 Install conda environment:
 
@@ -16,9 +23,9 @@ Activate conda environment:
 conda activate activity
 ```
 
-Run:
+## Run
 
-Open the `activity/src/1_generate_grams.py` file, and press F5.
+Within VS Code, open the `activity/src/1_generate_grams.py` file, and press F5.
 
 
 ## Dataset

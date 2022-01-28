@@ -351,3 +351,4 @@ MigrationBackup/
 
 activity/data_original
 activity/data_processed
+.venv
