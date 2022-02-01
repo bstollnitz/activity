@@ -14,4 +14,7 @@
         "ms-python.vscode-pylance",
     ],
     "remoteUser": "vscode",
+    "hostRequirements": {
+        "memory": "16gb",
+    },
 }
