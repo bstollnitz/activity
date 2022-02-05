@@ -5,6 +5,7 @@ import argparse
 import logging
 import zipfile
 from pathlib import Path
+import sys
 
 import numpy as np
 import pywt
@@ -170,7 +171,8 @@ def main() -> None:
     parser.add_argument("--data_processed_dir",
                         dest="data_processed_dir",
                         default=DATA_PROCESSED_DIR)
-    args = parser.parse_args()
+    argv = [] if ("ipykernel_launcher" in sys.argv[0]) else sys.argv
+    args = parser.parse_args(argv)
 
     generate_all(args.data_compressed_dir, args.data_original_dir,
                  args.data_processed_dir)
