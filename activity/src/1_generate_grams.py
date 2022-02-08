@@ -5,7 +5,6 @@ import argparse
 import logging
 import zipfile
 from pathlib import Path
-import sys
 
 import numpy as np
 import pywt
