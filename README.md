@@ -9,12 +9,14 @@ The code in this repro relates to the following blog posts:
 
 ## Setup
 
-If you have access to GitHub Codespaces, click on the "Code" button in this GitHub repo, select the "Codespaces" tab, and then click on "New codespace". Alternatively, you can set up your local machine using the following steps.
+If you have access to GitHub Codespaces, click on the "Code" button in this GitHub repo, select the "Codespaces" tab, and then click on "New codespace."
+
+Alternatively, you can set up your local machine using the following steps.
 
 Install conda environment:
 
 ```
-conda env create -f conda.yml
+conda env create -f environment.yml
 ```
 
 Activate conda environment:
