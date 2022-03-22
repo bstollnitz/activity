@@ -3,27 +3,44 @@ activity names."""
 
 import json
 from pathlib import Path
-from typing import List
+from typing import Callable, List
 
 import h5py
 import numpy as np
+from tqdm import tqdm
 
 from common import GramType, TrainOrTest
 
 
-def save_grams(
-    grams: np.ndarray,
-    gram_type: GramType,
-    train_or_test: TrainOrTest,
-    data_processed_dir: str,
-) -> None:
+def save_grams(gram_type: GramType, train_or_test: TrainOrTest,
+               data_processed_dir: str, signals: np.ndarray,
+               create_gram_func: Callable[[np.ndarray], np.ndarray]) -> None:
     """Saves spectrograms or scaleograms.
     """
+    (num_instances, num_components,
+     num_timesteps) = signals.shape  # (_, 9, 128)
+    chunk_shape = (1, num_components, num_timesteps, num_timesteps)
+    full_shape = (num_instances, num_components, num_timesteps, num_timesteps)
+
     gram_path = _get_gram_file_path(gram_type, train_or_test,
                                     data_processed_dir)
 
     with h5py.File(gram_path, "w") as file:
-        file.create_dataset(name=gram_type.value, data=grams)
+        dataset = file.create_dataset(name=gram_type.value,
+                                      shape=chunk_shape,
+                                      maxshape=full_shape,
+                                      chunks=chunk_shape)
+
+        for instance in tqdm(range(num_instances)):
+            instance_grams = np.zeros(chunk_shape)  # (9, 128, 128)
+
+            for component in range(num_components):
+                signal = signals[instance, component, :]
+                gram = create_gram_func(signal)  # (128, 128)
+                instance_grams[0, component, :, :] = gram
+
+            dataset.resize(instance + 1, axis=0)
+            dataset[instance, :, :, :] = instance_grams
 
 
 def save_labels(

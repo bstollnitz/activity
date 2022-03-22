@@ -61,28 +61,12 @@ def _generate_grams(
     logging.info("Generating %s %s.", train_or_test.value, gram_type.value)
 
     signals = utils_signals.read_signals(train_or_test, data_original_dir)
-    grams = create_grams(gram_type, signals)
-    utils_grams.save_grams(grams, gram_type, train_or_test, data_processed_dir)
-
-
-def create_grams(gram_type: GramType, signals: np.ndarray) -> np.ndarray:
-    """Generates spectrograms or scaleograms from signals, and returns them.
-    """
-    (num_instances, num_components,
-     num_timesteps) = signals.shape  # (_, 9, 128)
-    grams = np.zeros((num_instances, num_components, num_timesteps,
-                      num_timesteps))  # (_, 9, 128, 128)
 
     create_gram_func = (_create_spectrogram if gram_type
                         == GramType.SPECTROGRAMS else _create_scaleogram)
 
-    for instance in range(num_instances):
-        for component in range(num_components):
-            signal = signals[instance, component, :]
-            gram = create_gram_func(signal)  # (128, 128)
-            grams[instance, component, :, :] = gram
-
-    return grams
+    utils_grams.save_grams(gram_type, train_or_test, data_processed_dir,
+                           signals, create_gram_func)
 
 
 def _create_spectrogram(signal: np.ndarray) -> np.ndarray:
