@@ -12,10 +12,6 @@
     "extensions": [
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "ms-toolsai.jupyter",
     ],
     "remoteUser": "vscode",
-    "hostRequirements": {
-        "memory": "16gb",
-    },
 }
