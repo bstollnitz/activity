@@ -1,0 +1,15 @@
+name: activity
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.8.10
+  - pytorch==1.8.1
+  - numpy==1.21.2
+  - h5py==3.4.0
+  - pywavelets==1.1.1
+  - matplotlib==3.5.1
+  - tqdm==4.63.0
+  - yapf==0.31.0
+  - pylint==2.11.1
