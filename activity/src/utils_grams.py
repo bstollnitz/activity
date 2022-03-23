@@ -29,7 +29,8 @@ def save_grams(gram_type: GramType, train_or_test: TrainOrTest,
         dataset = file.create_dataset(name=gram_type.value,
                                       shape=chunk_shape,
                                       maxshape=full_shape,
-                                      chunks=chunk_shape)
+                                      chunks=chunk_shape,
+                                      compression="gzip")
 
         for instance in tqdm(range(num_instances)):
             instance_grams = np.zeros(chunk_shape)  # (9, 128, 128)
