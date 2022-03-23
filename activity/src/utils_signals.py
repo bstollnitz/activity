@@ -6,7 +6,7 @@ from typing import List
 
 import numpy as np
 
-from common import TrainOrTest
+from common import TrainOrTest, SUBSAMPLE
 
 
 def read_signals(train_or_test: TrainOrTest,
@@ -50,7 +50,7 @@ def read_signals(train_or_test: TrainOrTest,
         signals_list.append(rows)
     signals = np.array(signals_list)  # shape (9, 7352 or 2947, 128)
     signals = np.transpose(signals, (1, 0, 2))  # shape (7352 or 2947, 9, 128)
-    return signals
+    return signals[::SUBSAMPLE]
 
 
 def _standardize(my_array: np.ndarray) -> np.ndarray:
