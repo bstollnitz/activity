@@ -18,5 +18,5 @@ DATA_ORIGINAL_DIR = "activity/data_original"
 DATA_PROCESSED_DIR = "activity/data_processed"
 
 # SUBSAMPLE = 2 keeps every other data point in the signal, to reduce the time
-# and disk space require for the generation of spectrograms and scaleograms.
+# and disk space required for the generation of spectrograms and scaleograms.
 SUBSAMPLE = 2
