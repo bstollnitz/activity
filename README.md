@@ -5,7 +5,6 @@ This project uses spectrograms and scaleograms to predict human activity (e.g. w
 The code in this repro relates to the following blog posts:
 
 * [Creating spectrograms and scaleograms for signal classification](https://bea.stollnitz.com/blog/spectrograms-scaleograms/)
-(more to come)
 
 ## Setup
 
