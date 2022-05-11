@@ -27,7 +27,7 @@ conda activate activity
 
 ## Run
 
-Within VS Code, open the `activity/src/1_generate_grams.py` file, and press F5.
+Within VS Code, open the `activity/src/generate_grams.py` file, and press F5.
 
 
 ## Dataset

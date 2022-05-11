@@ -155,9 +155,9 @@ def main() -> None:
                         dest="data_processed_dir",
                         default=DATA_PROCESSED_DIR)
     args = parser.parse_args()
+    logging.info("input parameters: %s", vars(args))
 
-    generate_all(args.data_compressed_dir, args.data_original_dir,
-                 args.data_processed_dir)
+    generate_all(**vars(args))
 
 
 if __name__ == "__main__":
